@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GoWifeMe — Find Mechler a Wife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Have a single friend or family member? Help find Mechler a wife — a limited-time, non-tax-deductible opportunity." />
+  <meta name="theme-color" content="#4ca764" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #4ca764;
+      --dark: #222325;
+      --muted: #7c7f82;
+      --light-bg: #e9f6ee;
+      --white: #ffffff;
+      --border-green: #4ca764;
+      --timer-red: #ff3b30;
+    }
+
+    /* DS-Digital font – make sure DS-DIGI.TTF exists at this path */
+    @font-face {
+      font-family: 'DS-Digital';
+      src: url('DS-DIGI.TTF') format('truetype');
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--dark);
+      background-color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+    }
+
+    /* HEADER (sticky) */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #ffffff;
+      border-bottom: 1px solid #edf0f2;
+    }
+
+    .header-inner {
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo-img {
+      height: 130px; /* large logo */
+      width: auto;
+    }
+
+    .btn-outline {
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--border-green);
+      color: var(--border-green);
+      font-weight: 700;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--border-green);
+      color: #ffffff;
+      box-shadow: none;
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .logo-img {
+        height: 100px;
+      }
+
+      .btn-outline {
+        font-size: 0.85rem;
+        padding: 7px 14px;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 120px 0 110px;
+      color: #ffffff;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.78)),
+        url('hero-phones.png'); /* phones image with you on each screen */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Split the hero text into 3 lines for better aesthetics */
+    .hero-org {
+      margin-bottom: 12px;
+    }
+
+    .hero-org-line-top {
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.9;
+      margin-bottom: 6px;
+    }
+
+    .hero-org-line-main {
+      font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      line-height: 1.12;
+      text-transform: uppercase; /* ALL CAPS */
+    }
+
+    .hero-org-line-bottom {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-top: 6px;
+    }
+
+    .hero-tagline {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 14px;
+    }
+
+    .hero-description {
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 26px;
+    }
+
+    .scroll-down-text {
+      font-size: clamp(2.1rem, 4.8vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .swipe-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 22px;
+    }
+
+    .swipe-right-text {
+      font-size: clamp(1.7rem, 4.2vw, 2.4rem);
+      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* marker-ish strike-through */
+    .swipe-scribble {
+      position: absolute;
+      left: -8px;
+      right: -8px;
+      top: 55%;
+      height: 9px;
+      background: rgba(255, 59, 48, 0.95);
+      border-radius: 999px;
+      transform: rotate(-8deg);
+      box-shadow:
+        0 0 1px rgba(0,0,0,0.4),
+        0 0 4px rgba(255,59,48,0.6);
+    }
+
+    .swipe-scribble::before,
+    .swipe-scribble::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 59, 48, 0.9);
+      top: -2px;
+    }
+
+    .swipe-scribble::before {
+      left: -6px;
+      transform: rotate(6deg);
+    }
+
+    .swipe-scribble::after {
+      right: -6px;
+      transform: rotate(-6deg);
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 96px 0 80px;
+      }
+      .hero-description {
+        font-size: 0.97rem;
+      }
+    }
+
+    /* PROFILE SECTION (dating app style) */
+    .profile-section {
+      padding: 32px 0 64px;
+    }
+
+    .profile-card {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-photo-wrap {
+      position: relative;
+      min-height: 280px;
+    }
+
+    .profile-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-chip {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: rgba(0,0,0,0.7);
+      color: #f5f5f5;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .profile-body {
+      padding: 22px 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: visible;
+    }
+
+    /* Slim ribbon banner that extends past the card */
+    .profile-banner {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 115%;                /* extends past the card edges */
+      background: var(--green);
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-align: center;
+      padding: 6px 0;             /* slim */
+      margin: 0 0 18px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.16);
+      border-radius: 0;           /* ribbon, not pill */
+    }
+
+    .profile-banner::before,
+    .profile-banner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background: var(--green);
+    }
+
+    .profile-banner::before {
+      left: -10px;
+    }
+
+    .profile-banner::after {
+      right: -10px;
+    }
+
+    .profile-topline {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .profile-age {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .profile-lastname-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .profile-prompts {
+      font-size: 0.9rem;
+      color: var(--dark);
+      display: grid;
+      gap: 6px;
+    }
+
+    .profile-prompts > div {
+      padding-bottom: 4px;
+      border-bottom: 1px dashed #edf0f2;
+    }
+
+    .profile-prompts > div:last-child {
+      border-bottom: none;
+    }
+
+    .prompt-label {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .prompt-text {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .profile-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-solid {
+      background: var(--green);
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 9px 20px;
+      border: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: none;
+      transition: transform 0.1s ease, background 0.15s ease;
+    }
+
+    .btn-solid:hover {
+      transform: translateY(-1px);
+      background: #3c8a51;
+      box-shadow: none;
+    }
+
+    .superlike {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .superlike span {
+      color: #ffb800;
+    }
+
+    @media (max-width: 900px) {
+      .profile-card {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+
+      .profile-section {
+        padding: 24px 0 56px;
+      }
+    }
+
+    /* FEATURE SECTIONS (Handles / Kids) */
+    .section-light {
+      background-color: var(--light-bg);
+      padding: 64px 0;
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 48px;
+      margin-bottom: 32px;
+    }
+
+    .feature-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-row.feature-right {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    }
+
+    .feature-image img {
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    }
+
+    .feature-text {
+      max-width: 420px;
+    }
+
+    .feature-heading {
+      font-size: clamp(2rem, 3.6vw, 2.6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    /* Motion effects */
+    .reveal-up,
+    .reveal-left,
+    .reveal-right {
+      opacity: 0;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal-up {
+      transform: translateY(40px);
+    }
+
+    .reveal-left {
+      transform: translateX(-60px);
+      transition-delay: 0.12s;
+    }
+
+    .reveal-right {
+      transform: translateX(60px);
+      transition-delay: 0.12s;
+    }
+
+    .reveal-visible {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    @media (max-width: 900px) {
+      .feature-row,
+      .feature-row.feature-right {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-text {
+        max-width: none;
+      }
+    }
+
+    /* REVIEWS */
+    .reviews-section {
+      background-color: var(--light-bg);
+      padding: 40px 0 80px;
+      text-align: center;
+    }
+
+    .reviews-title {
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--green);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .reviews-stars {
+      font-size: 2.1rem;
+      color: #40454a;
+      margin-bottom: 6px;
+    }
+
+    .reviews-line {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #40454a;
+      margin-bottom: 32px;
+    }
+
+    .hashtag {
+      font-weight: 900;
+      color: var(--green);
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+
+    .self-destruct {
+      color: #ff0000;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .limited-offer {
+      color: var(--green);
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .timer-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .timer {
+      font-family: 'DS-Digital', 'Courier New', monospace;
+      font-size: 2.6rem;
+      font-weight: 400;
+      color: var(--timer-red);
+      letter-spacing: 0.08em;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #f9fafb;
+      padding: 20px 0 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <img src="go-wife-me.png" alt="GoWifeMe Logo" class="logo-img" />
+      <a class="btn-outline" href="sms:+15128100007">
+        Donate an Introduction
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-org">
+          <div class="hero-org-line-top">The</div>
+          <div class="hero-org-line-main">FIND MECHLER A WIFE</div>
+          <div class="hero-org-line-bottom">Initiative</div>
+        </div>
+
+        <p class="hero-tagline">a community effort</p>
+        <p class="hero-description">
+          Donate an introduction to your single friends or family members.
+          That is, only if you want him to be a family member.
+        </p>
+
+        <div class="scroll-down-text">Scroll Down</div>
+
+        <div class="swipe-wrapper">
+          <div class="swipe-right-text">Swipe Right</div>
+          <div class="swipe-scribble"></div>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn-outline" href="sms:+15128100007">
+            Donate an Introduction
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE (dating card with updated fields) -->
+    <section class="profile-section">
+      <div class="container">
+        <div class="profile-card">
+          <div class="profile-photo-wrap">
+            <!-- Swap this image with the main photo you want to use -->
+            <img src="profile-photo.png" alt="Michael profile photo" />
+            <div class="profile-chip">Offline · Being present</div>
+          </div>
+          <div class="profile-body">
+            <div>
+              <div class="profile-banner">20% MORE FUN THAN YOUR LAST BOYFRIEND!</div>
+
+              <div class="profile-topline">
+                <div class="profile-name">Mechler</div>
+                <div class="profile-age">41</div>
+              </div>
+              <div class="profile-lastname-note">
+                (It's his last name. Everyone knows a Michael, but not everyone knows a Mechler.)
+              </div>
+
+              <div class="profile-prompts">
+                <div>
+                  <div class="prompt-label">Location</div>
+                  <div class="prompt-text">Austin, TX</div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Industry</div>
+                  <div class="prompt-text">Real Estate</div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Job Title</div>
+                  <div class="prompt-text">Broker Associate</div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">School</div>
+                  <div class="prompt-text">
+                    Texas Tech University - Rawls College of Business,<br />
+                    The University of Texas at Austin - Continuing &amp; Innovative Education
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Education</div>
+                  <div class="prompt-text">
+                    BBA in Marketing, Real Estate License
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Religious Beliefs</div>
+                  <div class="prompt-text">
+                    Christian - Relationship with Him &gt; Religion
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Political Spectrum</div>
+                  <div class="prompt-text">
+                    Politics today feels like legalized gangs—the Reds versus the Blues.
+                    Although I lean centre-right/conservative, I care more about values and policies than labels.
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Children</div>
+                  <div class="prompt-text">Doesn't have children</div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Family Plans</div>
+                  <div class="prompt-text">
+                    Open to children, but also wants children of his own
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">What I'm Looking For</div>
+                  <div class="prompt-text">
+                    I'm seeking someone equally yoked both spiritually and politically—someone who shares my faith,
+                    values, and vision for the life we're building together.
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">Let's Make Sure We're On The Same Page About</div>
+                  <div class="prompt-text">
+                    Intentionality. I'm no Peter Pan. If you're chasing Neverland, you'll have to fly solo.
+                    I'm a traditionalist seeking the kind of woman who's strong, emotionally available, ambitious,
+                    and ready to grow together.
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prompt-label">About Me</div>
+                  <div class="prompt-text">
+                    I like to laugh and don’t mesh well with overly-sensitive people. I enjoy working *gasp*,
+                    downhill mountain biking, dirt biking, skiing, comedy shows, concerts, games (the sports kind,
+                    not the bs), races, and traveling—both spontaneous and planned. I own real estate and my own set
+                    of [reliable] wheels…and I don’t live with my parents.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-cta-row">
+              <a href="sms:+15128100007">
+                <button class="btn-solid">Donate an Introduction</button>
+              </a>
+              <div class="superlike">
+                Or <span>⭐️ Super Like</span> him to your best friend.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE PANELS -->
+    <section class="section-light">
+      <div class="container">
+        <!-- HANDLES WITH CARE -->
+        <div class="feature-row feature-left">
+          <div class="feature-image reveal-up">
+            <img src="handles-with-care.png" alt="Handles with care" />
+          </div>
+          <div class="feature-text reveal-right">
+            <h2 class="feature-heading">Handles with care</h2>
+          </div>
+        </div>
+
+        <!-- GOOD WITH KIDS -->
+        <div class="feature-row feature-right">
+          <div class="feature-text reveal-left">
+            <h2 class="feature-heading">Good with kids</h2>
+          </div>
+          <div class="feature-image reveal-up">
+            <img src="good-with-kids.png" alt="Good with kids" />
+          </div>
+        </div>
+
+        <!-- GOOD WITH OTHER KIDS, TOO -->
+        <div class="feature-row feature-left">
+          <div class="feature-image reveal-up">
+            <img src="good-with-other-kids.png" alt="Good with other kids, too" />
+          </div>
+          <div class="feature-text reveal-right">
+            <h2 class="feature-heading">Good with other kids, too</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS / COUNTDOWN -->
+    <section class="reviews-section">
+      <div class="container">
+        <h2 class="reviews-title">RAVING REVIEWS</h2>
+        <div class="reviews-stars">★★★★☆</div>
+        <div class="reviews-line">4 out of 5 stars from ex-girlfriends!</div>
+
+        <div class="hashtag">#GOWIFEMECHLER</div>
+
+        <p class="self-destruct">
+          ***This webpage will self-destruct once he’s in a relationship.***
+        </p>
+
+        <div class="limited-offer">⚡ Limited-time offer!</div>
+        <div class="timer-wrapper">
+          <div id="countdown" class="timer">23:59:59</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      © 2025 GoWifeMe.com. The Find Mechler a Wife Initiative is a non-501(c)(3). Sorry, no tax write-off. But it makes you feel good, no?
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Reveal on scroll for feature panels
+  const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('reveal-visible'));
+  }
+
+  // Countdown (loops every 24 hours)
+  let remaining = 24 * 60 * 60;
+  const timerEl = document.getElementById('countdown');
+  const format = n => n.toString().padStart(2, '0');
+
+  function tick() {
+    const h = Math.floor(remaining / 3600);
+    const m = Math.floor((remaining % 3600) / 60);
+    const s = remaining % 60;
+    timerEl.textContent = `${format(h)}:${format(m)}:${format(s)}`;
+    remaining--;
+    if (remaining < 0) remaining = 24 * 60 * 60;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
