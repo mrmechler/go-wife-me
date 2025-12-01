@@ -150,7 +150,6 @@
       margin: 0 auto;
     }
 
-    /* Split the hero text into 3 lines for better aesthetics */
     .hero-org {
       margin-bottom: 12px;
     }
@@ -317,7 +316,7 @@
       position: relative;
       left: 50%;
       transform: translateX(-50%);
-      width: 115%;                /* extends past the card edges */
+      width: 115%;
       background: var(--green);
       color: #ffffff;
       text-transform: uppercase;
@@ -325,10 +324,10 @@
       font-size: 0.82rem;
       letter-spacing: 0.14em;
       text-align: center;
-      padding: 6px 0;             /* slim */
+      padding: 6px 0;
       margin: 0 0 18px 0;
       box-shadow: 0 2px 6px rgba(0,0,0,0.16);
-      border-radius: 0;           /* ribbon, not pill */
+      border-radius: 0;
     }
 
     .profile-banner::before,
@@ -526,6 +525,14 @@
 
       .feature-text {
         max-width: none;
+      }
+
+      /* On mobile, ensure the "Good with kids" image shows before text */
+      .feature-row.feature-right .feature-image {
+        order: 1;
+      }
+      .feature-row.feature-right .feature-text {
+        order: 2;
       }
     }
 
@@ -828,7 +835,8 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      © 2025 GoWifeMe.com. The Find Mechler a Wife Initiative is a non-501(c)(3). Sorry, no tax write-off. But it makes you feel good, no?
+      © 2025 GoWifeMe.com. The Find Mechler a Wife Initiative is a non-501(c)(3).<br>
+      Sorry, no tax write-off. But it makes you feel good, no?
     </div>
   </footer>
 
